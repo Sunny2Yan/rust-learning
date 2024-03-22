@@ -20,23 +20,23 @@ pub fn bubble(arr: &mut [i32]) {
 
 // 2.选择排序
 // 遍历列表，定义第 $i$ 个位置为最小（大）元素，再遍历 $[i:]$，如果有小于（大于）第 $i$ 个位置的值时，则交换，直至排完。
-pub fn selection<T: Ord>(arr: &mut [T]) {
-    let n = arr.len();
-    for i in 0..n {
-        let mut min_index = i;
-        for j in i+1..n {
-            if arr[min_index] > arr[j] {
-                min_index = j;
-            }
-        }
-        arr.swap(i, min_index);
-    }
-}
+// pub fn selection<T: Ord>(arr: &mut [T]) {
+//     let n = arr.len();
+//     for i in 0..n {
+//         let min_index = i;
+//         for j in i+1..n {
+//             if arr[min_index] > arr[j] {
+//                 min_index = j;
+//             }
+//         }
+//         arr.swap(i, min_index);
+//     }
+// }
 
 // 3.插入排序
-// pub fn insert<T>(arr: &mut [T]) {
+pub fn insert<T>(arr: &mut [T]) {
 
-// }
+}
 
 // // 4.快速排序
 // pub fn quick<T>(arr: &mut [T]) {
