@@ -3,7 +3,7 @@
 
 // 1.冒泡排序
 // 比较相邻的元素。如果第一个比第二个大，就交换他们两个。(每轮得到一个最大的数)
-pub fn bubble(arr: &mut [i32]) {
+pub fn bubble<T: Ord>(arr: &mut [T]) {  // Ord 表示可以进行比较的泛型
     if arr.is_empty() {
         return;
     }

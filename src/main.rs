@@ -9,5 +9,9 @@ fn main() {
     // println!("bubble: {:?}", nums);
 
     selection(&mut nums);
-    println!("selection: {:?}", nums)
+    println!("selection: {:?}", nums);
+
+    let x: i32 = 5;
+    let y = x as f64;
+    println!("y: {}, type: {}", y, len(&y));
 }
