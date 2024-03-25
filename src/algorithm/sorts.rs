@@ -21,6 +21,10 @@ pub fn bubble<T: Ord>(arr: &mut [T]) {  // Ord 表示可以进行比较的泛型
 // 2.选择排序
 // 遍历列表，定义第 $i$ 个位置为最小（大）元素，再遍历 $[i:]$，如果有小于（大于）第 $i$ 个位置的值时，则交换，直至排完。
 pub fn selection<T: Ord>(arr: &mut [T]) {
+    if arr.is_empty() {
+        return;
+    }
+
     let n = arr.len();
     for i in 0..n {
         let mut min_index = i;
@@ -40,7 +44,23 @@ pub fn selection<T: Ord>(arr: &mut [T]) {
 
 // // 4.快速排序
 // pub fn quick<T>(arr: &mut [T]) {
-//     pass
+//     if arr.len() <= 1 {
+//         return;
+//     } else {
+//         let mut pivot = arr[0].clone();
+//         let mut left = Vec::new();
+//         let mut right = Vec::new();
+//         for num in arr[1..] {
+//             if num <= pivot {
+//                 left.push(num.clone());
+//             } else {
+//                 right.push(num.clone());
+//             }
+//         }
+//         quick(&mut left);
+//         quick(&mut right);
+//         return arr.clone_from_slice(&[left, vec![pivot.clone()], right].concat());
+//     }
 // }
 
 // // 5.归并排序

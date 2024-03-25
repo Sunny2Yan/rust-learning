@@ -229,7 +229,7 @@ fn main() {
 ### 4.1 `if` 表达式
 
 ```rust
-fn if_control(){
+fn if_control() {
     if number % 3 == 0 {
         println!("number is divisible by 3");
     } else if number % 2 == 0 {
