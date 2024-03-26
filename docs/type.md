@@ -1,32 +1,29 @@
-# 基础知识
+# 类型
 
-## 1. 变量与可变性
-1. 变量(variables)：Rust 鼓励利用不可变性。当变量不可变时，一旦值被绑定一个名称上，你就不能改变这个值。可以在变量名前添加 mut 来使其可变。
-2. 常量(constants)：绑定到一个名称的不允许改变的值，且不允许对常量使用 mut。声明常量使用 const 关键字而不是 let，并且必须注明值的类型。Rust 对常量的命名约定是在单词之间使用全大写加下划线。
-3. 隐藏(Shadowing)：定义一个与之前变量同名的新变量，则称第一个变量被第二个隐藏。
+## 1. 变量类型
+- 变量(variables)：当变量不可变时，一旦值被绑定一个名称上，就不能改变这个值。可以在变量名前添加 mut 来使其可变；
+- 常量(constants)：声明常量使用 const 关键字，且必须注明值的类型。Rust 对常量的命名约定是在单词之间使用全大写加下划线；
+- 隐藏(Shadowing)：定义一个与之前变量同名的新变量，则称第一个变量被第二个隐藏。
 
 ```rust
-fn var(){
-    /// 用于生成文档注释 (support markdown)
-    //! 用来生成文档注释，一般用在模块文件的头部，描述该模块 (support markdown)
-    let mut x = 5;  // 变量
-    const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;  // 常量
+let x = 5; // 不可变变量
+let mut y = 5;  // 可变变量
+const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;  // 常量
+let x = x + 1;  // 这个变量x隐藏了上面的x，此时不需要mut（mut是可改变变量值，而隐藏是创建新的变量）
 
-    let x = x + 1;  // 这个变量x隐藏了上面的x，此时不需要mut（mut是可改变变量值，而隐藏是创建新的变量）
+// 隐藏与mut的区别：
+let spaces_1 = "   ";
+let spaces_1 = spaces_1.len();  // 4
 
-    // 隐藏与mut的区别：
-    let spaces_1 = "   ";
-    let spaces_1 = spaces_1.len();  // 4
-
-    let mut spaces_2 = "   ";
-    // spaces_2 = spaces_2.len();  // 报错，不能改变变量类型
-}
+let mut spaces_2 = "   ";
+// spaces_2 = spaces_2.len();  // 报错，不能改变变量类型
 
 // 注：对于声明后未使用的变量，Rust 会给出警告，因为这可能会是个 BUG，可以使用下划线开头避免警告，如 `_x`。
 ```
 
 ## 2. 数据类型
-Rust 的数据类型(data type)分为两类：标量(scalar)和复合(compound)。Rust 是静态类型（statically typed）语言，即在编译时就必须知道所有变量的类型，如果不确定使用什么类型可以使用泛型类型来抽象代替。
+Rust 的数据类型(data type)分为两类：标量(scalar)和复合(compound)。
+Rust 是静态类型（statically typed）语言，即在编译时就必须知道所有变量的类型，如果不确定使用什么类型可以使用泛型类型来抽象代替。
 
 ### 2.1 标量类型
 - 整型：有符号：`i8`、`i16`、`i32`、`i64`、`i128`（数字为 bit），无符号：`u8`、`u16`、`u32`、`u64`、`u128`（数字为 bit），默认是 `i32`;
@@ -50,9 +47,11 @@ fn scalar_type(){
     let num: f64 = len(sum) as f64;  // as: 类型转换
  }
 ```
+
 ### 2.2 复合类型
 - 元组(tuple)：元组长度固定，元组中的每个元素的类型不必相同，用 `tup` 声明元组类型；
-- 数组(array)：数组长度固定，数组中的每个元素的类型必须相同，vector 类型是标准库提供的允许增长和缩小长度的类似数组的集合类型，一般不确定长度的用 vector；
+- 数组(array)：数组长度固定，数组中的每个元素的类型必须相同，
+- vector 类型是标准库提供的允许增长和缩小长度的类似数组的集合类型，一般不确定长度的用 vector；
 
 ```rust
 fn compound(){
@@ -72,6 +71,9 @@ fn compound(){
     let a = [3; 5];  // 初始值加分号再加元素个数 [3, 3, 3, 3, 3]
 
     let first = a[0];  // 索引访问
+    
+    // 2.2.3 vector类型
+    
 }
 ```
 
@@ -180,50 +182,3 @@ fn main() {
 ```
 
 注：编译时，编译器会根据具体的类型将泛型还原，因此泛型不会影响性能。
-
-## 3. 函数
-Rust 用 `fn` 关键字来声明新函数，函数名使用小写字母并用下划线分隔单词。Rust 返回值时不需要对返回值命名，但要在箭头（`->`）后声明它的类型。
-
-```rust
-// 1. 带参数
-fn another_function(key: char, value: i32) {  // 参数类型必须指明
-    println!("{key}: {value}");
-}  // Rust 不关心函数定义所在的位置，只要函数被调用时出现在调用之处可见的作用域内就行
-
-fn plus_one(x: i32) -> i32 {
-    x + 1  // 没有分号，完整的语句不会返回值
-}
-
-fn add(x: i32) -> i32 {
-    if x > 10 {
-        return x * 2
-    }
-    x + 5
-}
-
-fn main() {
-    println!("Hello, world!");
-    var();
-    scalar_type();
-    compound();
-
-    // 1. 带参数
-    another_function('x', 5);
-
-    // 2. 赋值
-    let y = {  // 不能 y=x=3
-        let x = 3;  // 语句需要 ;结尾
-        x + 1     // 表达式不需要 ; 结尾
-    };
-    println!("The value of y is: {y}");
-
-    // 3. 返回值
-    let x = plus_one(5);
-    println!("The value of x is: {x}");
-
-    // 4. 提前返回要用 return
-    let y = add(8);
-    println!("The value of y is: {y}");
-}
-```
-注：序列 `1..5`表示 `range(1, 5)`，`1..=5`表示 `range(1, 5)`。`.rev()` 表示反转
