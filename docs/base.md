@@ -7,6 +7,8 @@
 
 ```rust
 fn var(){
+    /// 用于生成文档注释 (support markdown)
+    //! 用来生成文档注释，一般用在模块文件的头部，描述该模块 (support markdown)
     let mut x = 5;  // 变量
     const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;  // 常量
 
@@ -269,7 +271,7 @@ fn for_cycle(){
 
     // 3. for循环
     let a = [10, 20, 30, 40, 50];
-    for element in a {
+    for element in a {  // a 是一个 iter
         println!("the value is: {element}");
     }
 }

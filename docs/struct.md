@@ -217,6 +217,3 @@ fn main() {
 ```
 
 每个 struct 允许拥有多个 impl 块。
-
-
-
