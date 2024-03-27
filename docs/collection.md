@@ -26,7 +26,7 @@ let third: Option<&i32> = v.get(2);  // get方法读取，不会产生溢出报�
 // 4. vector的遍历
 let v = vec![100, 32, 57];  // 不可变vector
 for i in &v {
-    println!("{i}");  // zhi'nen
+    println!("{i}");  //
 }
 
 let mut v = vec![100, 32, 57];  // 可变vector
@@ -52,8 +52,8 @@ let row = vec![
 ```
 
 ## 2. String
-
 `String` 是一个 `Vec<u8>` 的封装
+**注：Rust的字符串Slice操作实际上是切的bytes。若切片的位置正好是一个Unicode字符的内部，Rust会发生Runtime的panic.**
 
 ```rust
 // 1. string的创建
@@ -88,9 +88,12 @@ let h = s1[0];  // 报错，rust没有字符串索引；UTF-8占一个字节，U
 for c in "Зд".chars() {
     println!("{c}");
 }
+
+let z = &*y  // &*将String类型变成str
 ```
 
 ## 3. Hash Map
+HashMap 属于 `std::collections` 模块下，该类型同python总的字典类型
 
 ```rust
 // 1. hash map的创建
@@ -112,17 +115,15 @@ for (key, value) in &scores {
 
 // 4. hash map的更新
 scores.insert(String::from("Blue"), 25);  // 直接覆盖
-scores.entry(String::from("Blue")).or_insert(25); 
+scores.entry(String::from("Blue")).or_insert(25);
 // entry() 表示值可能存在也可能不存在；
 // or_insert() 在键对应的值存在时就返回这个值的可变引用，如不存在则将参数作为新值插入并返回新值的可变引用
-
-use std::collections::HashMap;
 
 let text = "hello world wonderful world";
 let mut map = HashMap::new();
 
 for word in text.split_whitespace() {
-    let count = map.entry(word).or_insert(0);
+    let count = map.entry(word).or_insert(0);  // 使用entry则不需要判断字母在不在hashmap
     *count += 1;
 }
 println!("{:?}", map);
